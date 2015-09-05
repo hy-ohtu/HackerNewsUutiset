@@ -9,7 +9,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class HackerPaivanUutiset implements PaivanUutiset {
-    
+
     private static Gson gson = new Gson();
 
     @Override
@@ -35,5 +35,5 @@ public class HackerPaivanUutiset implements PaivanUutiset {
         Uutinen uutinen = gson.fromJson(vastaus, Uutinen.class);
         return "Viimeisin uutinen on " + uutinen.toString();
     }
-    
+
 }
