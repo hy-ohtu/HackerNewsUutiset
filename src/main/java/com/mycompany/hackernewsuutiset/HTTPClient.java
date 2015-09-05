@@ -16,12 +16,17 @@ public class HTTPClient {
 		try {
 			URL url = new URL(URLString);
 			urlConn = url.openConnection();
-			if (urlConn != null)
+
+			if (urlConn != null) {
 				urlConn.setReadTimeout(60 * 1000);
+			}
+
 			if (urlConn != null && urlConn.getInputStream() != null) {
 				in = new InputStreamReader(urlConn.getInputStream(),
 						Charset.defaultCharset());
+
 				BufferedReader bufferedReader = new BufferedReader(in);
+
 				if (bufferedReader != null) {
 					int cp;
 					while ((cp = bufferedReader.read()) != -1) {
@@ -29,11 +34,13 @@ public class HTTPClient {
 					}
 					bufferedReader.close();
 				}
+
 			}
-		in.close();
+
+			in.close();
 		} catch (Exception e) {
 			throw new RuntimeException("Virhe hakiessa osoitteesta: "+ URLString, e);
-		} 
+		}
 		return sb.toString();
 	}
 }
