@@ -2,7 +2,9 @@
 package com.mycompany.hackernewsuutiset;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.charset.Charset;
@@ -11,13 +13,9 @@ import java.nio.charset.Charset;
 public class HTTPClient {
     public static String callURL(String URLString) {
 		StringBuilder sb = new StringBuilder();
-		URLConnection urlConn = null;
 		InputStreamReader in = null;
 		try {
-			URL url = new URL(URLString);
-			urlConn = url.openConnection();
-			if (urlConn != null)
-				urlConn.setReadTimeout(60 * 1000);
+			URLConnection urlConn = createUrlConnection(URLString);
 			if (urlConn != null && urlConn.getInputStream() != null) {
 				in = new InputStreamReader(urlConn.getInputStream(),
 						Charset.defaultCharset());
@@ -36,4 +34,11 @@ public class HTTPClient {
 		} 
 		return sb.toString();
 	}
+
+    private static URLConnection createUrlConnection(String URLString) throws IOException, MalformedURLException {
+        URL url = new URL(URLString);
+        URLConnection urlConn = url.openConnection();
+        urlConn.setReadTimeout(60 * 1000);
+        return urlConn;
+    }
 }
