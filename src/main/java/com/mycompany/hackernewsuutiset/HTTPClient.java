@@ -3,6 +3,7 @@ package com.mycompany.hackernewsuutiset;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.MalformedURLException;
@@ -13,20 +14,17 @@ import java.nio.charset.Charset;
 
 public class HTTPClient {
     public static String callURL(String URLString) {
-		InputStreamReader in = null;
 		try {
 			URLConnection urlConn = createUrlConnection(URLString);
-			if (urlConn != null && urlConn.getInputStream() != null) {
-				in = new InputStreamReader(urlConn.getInputStream(),
-						Charset.defaultCharset());
-				BufferedReader bufferedReader = new BufferedReader(in);
+                        InputStream inputStream = urlConn.getInputStream();
+			if (inputStream != null) {
+		Reader bufferedReader = getReaderForInputStream(inputStream);
 				if (bufferedReader != null) {
                                         String result = readFully(bufferedReader);
 					bufferedReader.close();
                                         return result;
 				}
 			}
-		in.close();
                         return "";
 		} catch (Exception e) {
 			throw new RuntimeException("Virhe hakiessa osoitteesta: "+ URLString, e);
@@ -38,6 +36,12 @@ public class HTTPClient {
         URLConnection urlConn = url.openConnection();
         urlConn.setReadTimeout(60 * 1000);
         return urlConn;
+    }
+
+    private static Reader getReaderForInputStream(InputStream inputStream) throws IOException {
+        InputStreamReader in = new InputStreamReader(inputStream, Charset.defaultCharset());
+        BufferedReader bufferedReader = new BufferedReader(in);
+        return bufferedReader;
     }
 
     private static String readFully(Reader bufferedReader) throws IOException {
