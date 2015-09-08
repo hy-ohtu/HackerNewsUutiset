@@ -16,16 +16,9 @@ public class HTTPClient {
     public static String callURL(String URLString) {
 		try {
 			URLConnection urlConn = createUrlConnection(URLString);
+
                         InputStream inputStream = urlConn.getInputStream();
-			if (inputStream != null) {
-		Reader bufferedReader = getReaderForInputStream(inputStream);
-				if (bufferedReader != null) {
-                                        String result = readFully(bufferedReader);
-					bufferedReader.close();
-                                        return result;
-				}
-			}
-                        return "";
+                        return readInputStream(inputStream);
 		} catch (Exception e) {
 			throw new RuntimeException("Virhe hakiessa osoitteesta: "+ URLString, e);
 		} 
@@ -36,6 +29,15 @@ public class HTTPClient {
         URLConnection urlConn = url.openConnection();
         urlConn.setReadTimeout(60 * 1000);
         return urlConn;
+    }
+
+    private static String readInputStream(InputStream inputStream) throws IOException {
+        if (inputStream == null)
+            return "";
+
+        try(Reader bufferedReader = getReaderForInputStream(inputStream)) {
+            return readFully(bufferedReader);
+        }
     }
 
     private static Reader getReaderForInputStream(InputStream inputStream) throws IOException {
