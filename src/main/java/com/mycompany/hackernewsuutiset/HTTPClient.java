@@ -14,15 +14,15 @@ import java.nio.charset.Charset;
 
 public class HTTPClient {
     public static String callURL(String URLString) {
-		try {
-			URLConnection urlConn = createUrlConnection(URLString);
+        try {
+            URLConnection urlConn = createUrlConnection(URLString);
 
-                        InputStream inputStream = urlConn.getInputStream();
-                        return readInputStream(inputStream);
-		} catch (Exception e) {
-			throw new RuntimeException("Virhe hakiessa osoitteesta: "+ URLString, e);
-		} 
-	}
+            InputStream inputStream = urlConn.getInputStream();
+            return readInputStream(inputStream);
+        } catch (Exception e) {
+            throw new RuntimeException("Virhe hakiessa osoitteesta: "+ URLString, e);
+        }
+    }
 
     private static URLConnection createUrlConnection(String URLString) throws IOException, MalformedURLException {
         URL url = new URL(URLString);
