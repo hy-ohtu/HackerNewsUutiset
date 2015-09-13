@@ -21,11 +21,6 @@ public class HackerPaivanUutiset implements PaivanUutiset {
         int suosituin = Integer.parseInt(array[0]);
         String vastaus = HTTPClient.callURL("https://hacker-news.firebaseio.com/v0/item/" + suosituin + ".json?print=pretty");
         Uutinen uutinen = gson.fromJson(vastaus, Uutinen.class);
-        System.out.println("");
-	 System.out.println("");
- System.out.println("");
- System.out.println("");
-	
  return "Suosituin uutinen on " + uutinen.toString();
     }
 
