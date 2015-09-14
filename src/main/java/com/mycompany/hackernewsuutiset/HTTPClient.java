@@ -2,6 +2,7 @@
 package com.mycompany.hackernewsuutiset;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -19,16 +20,7 @@ public class HTTPClient {
 			if (urlConn != null)
 				urlConn.setReadTimeout(60 * 1000);
 			if (urlConn != null && urlConn.getInputStream() != null) {
-				in = new InputStreamReader(urlConn.getInputStream(),
-						Charset.defaultCharset());
-				BufferedReader bufferedReader = new BufferedReader(in);
-				if (bufferedReader != null) {
-					int cp;
-					while ((cp = bufferedReader.read()) != -1) {
-						sb.append((char) cp);
-					}
-					bufferedReader.close();
-				}
+				in = readStream(in, urlConn, sb);
 			}
 		in.close();
 		} catch (Exception e) {
@@ -36,4 +28,18 @@ public class HTTPClient {
 		} 
 		return sb.toString();
 	}
+
+    private static InputStreamReader readStream(InputStreamReader in, URLConnection urlConn, StringBuilder sb) throws IOException {
+        in = new InputStreamReader(urlConn.getInputStream(),
+                Charset.defaultCharset());
+        BufferedReader bufferedReader = new BufferedReader(in);
+        if (bufferedReader != null) {
+            int cp;
+            while ((cp = bufferedReader.read()) != -1) {
+                sb.append((char) cp);
+            }
+            bufferedReader.close();
+        }
+        return in;
+    }
 }
