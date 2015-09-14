@@ -10,14 +10,17 @@ import java.nio.charset.Charset;
 
 public class HTTPClient {
     public static String callURL(String URLString) {
+                System.out.println("aaa");
 		StringBuilder sb = new StringBuilder();
 		URLConnection urlConn = null;
 		InputStreamReader in = null;
 		try {
 			URL url = new URL(URLString);
 			urlConn = url.openConnection();
-			if (urlConn != null)
-				urlConn.setReadTimeout(60 * 1000);
+			if (urlConn != null) {     
+                            System.out.println("aaa");  
+                            urlConn.setReadTimeout(60 * 1000);
+                        }   
 			if (urlConn != null && urlConn.getInputStream() != null) {
 				in = new InputStreamReader(urlConn.getInputStream(),
 						Charset.defaultCharset());
@@ -30,6 +33,8 @@ public class HTTPClient {
 					bufferedReader.close();
 				}
 			}
+                
+            System.out.println("aaa");  
 		in.close();
 		} catch (Exception e) {
 			throw new RuntimeException("Virhe hakiessa osoitteesta: "+ URLString, e);
