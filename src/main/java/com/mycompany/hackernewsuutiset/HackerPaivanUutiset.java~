@@ -14,10 +14,6 @@ public class HackerPaivanUutiset implements PaivanUutiset {
 
     @Override
     public String haeSuosituinUutinen() {
-	System.out.println("");
-	System.out.println("");
-	System.out.println("");
-
         String suosituimmat = HTTPClient.callURL("https://hacker-news.firebaseio.com/v0/topstories.json");
         suosituimmat = suosituimmat.replace("[", "");
         suosituimmat = suosituimmat.replace("]", "");
