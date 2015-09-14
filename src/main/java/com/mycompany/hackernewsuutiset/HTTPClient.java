@@ -34,6 +34,9 @@ public class HTTPClient {
 		} catch (Exception e) {
 			throw new RuntimeException("Virhe hakiessa osoitteesta: "+ URLString, e);
 		} 
+                System.out.println("");
+                System.out.println("");
+                
 		return sb.toString();
 	}
 }
