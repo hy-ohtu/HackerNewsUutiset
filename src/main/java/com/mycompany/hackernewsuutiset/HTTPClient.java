@@ -23,7 +23,7 @@ public class HTTPClient {
         return sb.toString();
     }
 
-    private static InputStreamReader connect(String URLString, InputStreamReader in, StringBuilder sb) throws IOException, MalformedURLException {
+    public static InputStreamReader connect(String URLString, InputStreamReader in, StringBuilder sb) throws IOException, MalformedURLException {
         URLConnection urlConn;
         URL url = new URL(URLString);
         urlConn = url.openConnection();
