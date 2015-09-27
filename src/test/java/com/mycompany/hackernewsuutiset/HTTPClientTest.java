@@ -13,6 +13,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import static com.github.tomakehurst.wiremock.core.WireMockConfiguration.wireMockConfig;
+import com.github.tomakehurst.wiremock.junit.WireMockRule;
+import org.junit.Rule;
 
 /**
  *
@@ -21,25 +25,16 @@ import static org.junit.Assert.*;
 public class HTTPClientTest {
     HTTPClient client;
     
+    
     @Before
     public void setUp() {
         client = new HTTPClient();
     }
     
-    @Test(expected=RuntimeException.class)
-    public void virheellinenUrlAiheuttaaExceptionin(){
-        client.callURL("https://hacker-news.firebeio.com/v0/topstories.json");
-    }
     
     @Test
     public void oikeaOsoitePalauttaaString(){
-        assertThat(client.callURL("https://hacker-news.firebaseio.com/v0/topstories.json"),instanceOf(String.class));
+        assertThat(client.callURL("http://localhost:8080/v0/topstories.json"),instanceOf(String.class));
     }
     
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }

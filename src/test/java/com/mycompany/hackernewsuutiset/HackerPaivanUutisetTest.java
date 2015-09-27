@@ -12,6 +12,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import static com.github.tomakehurst.wiremock.client.WireMock.*;
+import com.github.tomakehurst.wiremock.junit.WireMockRule;
+import org.junit.Rule;
 
 /**
  *
@@ -32,33 +35,35 @@ class Title {
 public class HackerPaivanUutisetTest {
     Gson gson;
     HackerPaivanUutiset uutiset;
+
     
     @Before
     public void setUp() {
           gson = new Gson();
           uutiset = new HackerPaivanUutiset();
+          uutiset.setUrl("http://localhost:8080");
     }
     
     @Test
     public void suosituinUutinenPalauttaaSuosituimman(){
-        String suosituimmat = HTTPClient.callURL("https://hacker-news.firebaseio.com/v0/topstories.json");
+        String suosituimmat = HTTPClient.callURL("http://localhost:8080/v0/topstories.json");
         suosituimmat = suosituimmat.replace("[", "");
         suosituimmat = suosituimmat.replace("]", "");
         String[] array = suosituimmat.split(",");
         int suosituin = Integer.parseInt(array[0]);
-        String vastaus = HTTPClient.callURL("https://hacker-news.firebaseio.com/v0/item/" + suosituin + ".json?print=pretty");
+        String vastaus = HTTPClient.callURL("http://localhost:8080/v0/item/" + suosituin + ".json?print=pretty");
         Title title = gson.fromJson(vastaus, Title.class);
         assertTrue(uutiset.haeSuosituinUutinen().contains(title.getTitle()));
     }
     
     @Test
     public void viimeisinUutinenPalauttaaViimeisimman(){
-        String suosituimmat = HTTPClient.callURL("https://hacker-news.firebaseio.com/v0/newstories.json");
+        String suosituimmat = HTTPClient.callURL("http://localhost:8080/v0/newstories.json");
         suosituimmat = suosituimmat.replace("[", "");
         suosituimmat = suosituimmat.replace("]", "");
         String[] array = suosituimmat.split(",");
         int suosituin = Integer.parseInt(array[0]);
-        String vastaus = HTTPClient.callURL("https://hacker-news.firebaseio.com/v0/item/" + suosituin + ".json?print=pretty");
+        String vastaus = HTTPClient.callURL("http://localhost:8080/v0/item/" + suosituin + ".json?print=pretty");
         Title title = gson.fromJson(vastaus, Title.class);
         assertTrue(uutiset.haeViimeisinUutinen().contains(title.getTitle()));
     }
