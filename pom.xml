@@ -28,11 +28,11 @@
             <artifactId>gson</artifactId>
             <version>2.2.4</version>
         </dependency>
-        <dependency>
+<!--        <dependency>
     <groupId>com.github.tomakehurst</groupId>
     <artifactId>wiremock</artifactId>
     <version>1.57</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
     <build>
     <plugins>
