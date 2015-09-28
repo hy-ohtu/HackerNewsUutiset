@@ -27,12 +27,12 @@ public class TestHackerPaivanUutiset {
     
     
     public TestHackerPaivanUutiset() {
-        wireMockServer = new WireMockServer(); //No-args constructor will start on port 8080, no HTTPS
-        wireMockServer.start();
-        wireMockServer.stubFor(get(urlEqualTo("*"))
-            .willReturn(aResponse()
-                .withStatus(200)
-                .withBody(NEWSTORIES)));
+        //wireMockServer = new WireMockServer(); //No-args constructor will start on port 8080, no HTTPS
+        //wireMockServer.start();
+        //wireMockServer.stubFor(get(urlEqualTo("*"))
+        //    .willReturn(aResponse()
+        //        .withStatus(200)
+         //       .withBody(NEWSTORIES)));
     }
     
     @BeforeClass
@@ -45,16 +45,16 @@ public class TestHackerPaivanUutiset {
     
     @Before
     public void setUp() {
-        wireMockServer.start();
+        //wireMockServer.start();
     }
     
     @After
     public void tearDown() {
-        wireMockServer.stop();
+        //wireMockServer.stop();
     }
 
     @Test
     public void testHaeSuosituinUutinen() {
-        String s = HackerPaivanUutiset.haeSuosituinUutinen();
+        //String s = HackerPaivanUutiset.haeSuosituinUutinen();
     }
 }
