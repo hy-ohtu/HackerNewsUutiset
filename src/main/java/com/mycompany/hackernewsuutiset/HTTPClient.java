@@ -2,6 +2,7 @@
 package com.mycompany.hackernewsuutiset;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
@@ -22,13 +23,7 @@ public class HTTPClient {
 				in = new InputStreamReader(urlConn.getInputStream(),
 						Charset.defaultCharset());
 				BufferedReader bufferedReader = new BufferedReader(in);
-				if (bufferedReader != null) {
-					int cp;
-					while ((cp = bufferedReader.read()) != -1) {
-						sb.append((char) cp);
-					}
-					bufferedReader.close();
-				}
+                bufferedReader(bufferedReader, sb);
 			}
 		in.close();
 		} catch (Exception e) {
@@ -36,4 +31,14 @@ public class HTTPClient {
 		} 
 		return sb.toString();
 	}
+
+    private static void bufferedReader(BufferedReader bufferedReader, StringBuilder sb) throws IOException {
+        if (bufferedReader != null) {
+            int cp;
+            while ((cp = bufferedReader.read()) != -1) {
+                sb.append((char) cp);
+            }
+            bufferedReader.close();
+        }
+    }
 }
