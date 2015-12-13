@@ -1,0 +1,4 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+HackerNewsUutiset,com.mycompany.hackernewsuutiset,HTTPClient,3,78,4,6,1,22,5,3,1,2
+HackerNewsUutiset,com.mycompany.hackernewsuutiset,HackerPaivanUutiset,0,137,0,0,0,21,0,5,0,5
+HackerNewsUutiset,com.mycompany.hackernewsuutiset,Uutinen,0,21,0,0,0,2,0,2,0,2
