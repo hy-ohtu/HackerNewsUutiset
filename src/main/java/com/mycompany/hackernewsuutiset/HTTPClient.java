@@ -16,8 +16,7 @@ public class HTTPClient {
 		try {
 			URL url = new URL(URLString);
 			urlConn = url.openConnection();
-			if (urlConn != null)
-				urlConn.setReadTimeout(60 * 1000);
+                        readTimeoutSetter(urlConn);
 			if (urlConn != null && urlConn.getInputStream() != null) {
 				in = new InputStreamReader(urlConn.getInputStream(),
 						Charset.defaultCharset());
@@ -36,4 +35,9 @@ public class HTTPClient {
 		} 
 		return sb.toString();
 	}
+
+    private static void readTimeoutSetter(URLConnection urlConn) {
+        if (urlConn != null)
+            urlConn.setReadTimeout(60 * 1000);
+    }
 }
