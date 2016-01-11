@@ -24,8 +24,6 @@ public class HTTPClient {
 		} 
 		return sb.toString();
 	}
-<<<<<<< HEAD
-=======
 
     private static InputStreamReader callURLIf(URLConnection urlConn, InputStreamReader in, StringBuilder sb) throws IOException {
         if (urlConn != null)
