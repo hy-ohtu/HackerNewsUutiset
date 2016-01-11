@@ -13,38 +13,34 @@ import java.nio.charset.Charset;
 public class HTTPClient {
     public static String callURL(String URLString) {
 		StringBuilder sb = new StringBuilder();
-		URLConnection urlConn = null;
-		InputStreamReader in = null;
 		try {
-			urlConn = openConnection(URLString);
+            URLConnection urlConn = openConnection(URLString);
 			if (isValid(urlConn)) {
-				in = new InputStreamReader(urlConn.getInputStream(),
+                InputStreamReader in = new InputStreamReader(urlConn.getInputStream(),
 						Charset.defaultCharset());
 				BufferedReader bufferedReader = new BufferedReader(in);
-                                readConnection(bufferedReader, sb);
-			}
-                        in.close();
+                readConnection(bufferedReader, sb);
+                in.close();
+            }
 		} catch (Exception e) {
 			throw new RuntimeException("Virhe hakiessa osoitteesta: "+ URLString, e);
 		} 
 		return sb.toString();
 	}
 
-    private static boolean isValid(URLConnection urlConn) throws IOException {
+    public static boolean isValid(URLConnection urlConn) throws IOException {
         return urlConn != null && urlConn.getInputStream() != null;
     }
 
-    private static URLConnection openConnection(String URLString) throws IOException, MalformedURLException {
-        URLConnection urlConn;
+    public static URLConnection openConnection(String URLString) throws IOException, MalformedURLException {
         URL url = new URL(URLString);
-        urlConn = url.openConnection();
-        System.out.println("merde");
+        URLConnection urlConn = url.openConnection();
         if (urlConn != null)
             urlConn.setReadTimeout(60 * 1000);
         return urlConn;
     }
 
-    private static void readConnection(BufferedReader bufferedReader, StringBuilder sb) throws IOException {
+    public static void readConnection(BufferedReader bufferedReader, StringBuilder sb) throws IOException {
         if (bufferedReader != null) {
             int cp;
             while ((cp = bufferedReader.read()) != -1) {
