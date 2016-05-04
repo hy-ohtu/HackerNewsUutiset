@@ -1,2 +1,5 @@
 /HackerNewsUutiset/nbproject/private/
 /HackerNewsUutiset/target/
+target/
+nbproject/private/
+.idea/
